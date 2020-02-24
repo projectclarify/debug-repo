@@ -1,0 +1,29 @@
+[debug] [2020-02-23T00:10:24.819Z] ----------------------------------------------------------------------
+[debug] [2020-02-23T00:10:24.821Z] Command:       /home/jovyan/.nvm/versions/node/v13.8.0/bin/node /home/jovyan/.nvm/versions/node/v13.8.0/bin/firebase use --add clarify
+[debug] [2020-02-23T00:10:24.821Z] CLI Version:   7.13.0
+[debug] [2020-02-23T00:10:24.821Z] Platform:      linux
+[debug] [2020-02-23T00:10:24.821Z] Node Version:  v13.8.0
+[debug] [2020-02-23T00:10:24.822Z] Time:          Sun Feb 23 2020 00:10:24 GMT+0000 (Coordinated Universal Time)
+[debug] [2020-02-23T00:10:24.822Z] ----------------------------------------------------------------------
+[debug] [2020-02-23T00:10:24.822Z] 
+[debug] [2020-02-23T00:10:24.832Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-23T00:10:24.832Z] > attempting to authenticate via app default credentials
+[debug] [2020-02-23T00:10:25.271Z] TypeError: Cannot create property 'refresh_token' on string 'Missing required header "Metadata-Flavor": "Google"
+'
+    at /home/jovyan/.nvm/versions/node/v13.8.0/lib/node_modules/firebase-tools/node_modules/google-auto-auth/node_modules/google-auth-library/lib/auth/oauth2client.js:208:28
+    at /home/jovyan/.nvm/versions/node/v13.8.0/lib/node_modules/firebase-tools/node_modules/google-auto-auth/node_modules/google-auth-library/lib/auth/computeclient.js:85:7
+    at Request._callback (/home/jovyan/.nvm/versions/node/v13.8.0/lib/node_modules/firebase-tools/node_modules/google-auto-auth/node_modules/google-auth-library/lib/transporters.js:106:7)
+    at Request.self.callback (/home/jovyan/.nvm/versions/node/v13.8.0/lib/node_modules/firebase-tools/node_modules/request/request.js:185:22)
+    at Request.emit (events.js:321:20)
+    at Request.EventEmitter.emit (domain.js:485:12)
+    at Request.<anonymous> (/home/jovyan/.nvm/versions/node/v13.8.0/lib/node_modules/firebase-tools/node_modules/request/request.js:1154:10)
+    at Request.emit (events.js:321:20)
+    at Request.EventEmitter.emit (domain.js:485:12)
+    at IncomingMessage.<anonymous> (/home/jovyan/.nvm/versions/node/v13.8.0/lib/node_modules/firebase-tools/node_modules/request/request.js:1076:12)
+    at Object.onceWrapper (events.js:427:28)
+    at IncomingMessage.emit (events.js:333:22)
+    at IncomingMessage.EventEmitter.emit (domain.js:485:12)
+    at endReadableNT (_stream_readable.js:1201:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[error] 
+[error] Error: An unexpected error has occurred.

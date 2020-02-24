@@ -1,0 +1,24 @@
+name: Deploy Python Cloud Functions
+on:
+  push:
+    branches:
+    - master
+env:
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  GCP_ZONE: ${{ secrets.GCP_ZONE }}
+
+jobs:
+  deploy-loader-functions:
+    name: Deploy ftw loader functions
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '270.0.0'
+        service_account_email: ${{ secrets.SA_EMAIL }}
+        service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+    - name: Deploy core loader functions
+      run: python ftw/ftw_pyfns/deploy.py --all
+

@@ -1,3 +1,0 @@
-
-# Unimodal EEG SSL
-
