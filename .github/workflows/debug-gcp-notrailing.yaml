@@ -1,4 +1,4 @@
-name: json key / gcloud config list
+name: gcp notrailing
 on:
   push:
     branches:
