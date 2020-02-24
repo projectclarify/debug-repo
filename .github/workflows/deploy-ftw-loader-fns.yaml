@@ -20,5 +20,5 @@ jobs:
         service_account_email: ${{ secrets.SA_EMAIL }}
         service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
     - name: Deploy core loader functions
-      run: python ftw/ftw_pyfns/deploy.py --all
+      run: cd ftw/ftw_pyfns && pip install -e . && python deploy.py --all
 
