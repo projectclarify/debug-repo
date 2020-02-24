@@ -1,4 +1,4 @@
-name: Deploy
+name: FTW Deploy Study
 
 on:
   push:
@@ -22,4 +22,10 @@ jobs:
         with:
           version: '275.0.0'
           service_account_email: ${{ secrets.SA_EMAIL }}
-          service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS}} 
+          service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+      - name: gcloud Set up
+        run: |
+          gcloud config set project $PROJECT_ID
+      - name: Build
+        run: |
+          gcloud app deploy app.yaml
