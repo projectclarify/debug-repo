@@ -1,4 +1,4 @@
-name: b64 key with newlines / gcp
+name: b64 key, no newlines / gcp
 on:
   push:
     branches:
