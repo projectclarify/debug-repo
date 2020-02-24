@@ -1,4 +1,4 @@
-name: no newlines, docs
+name: trailing newline
 on:
   push:
     branches:
