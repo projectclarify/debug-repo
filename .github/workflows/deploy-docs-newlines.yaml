@@ -1,4 +1,4 @@
-name: Deploy docs - newlines b64 key
+name: newlines, docs
 on:
   push:
     branches:
