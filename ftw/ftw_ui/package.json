@@ -4,11 +4,14 @@
   "contributors": [
     "The Polymer Authors"
   ],
+  "engines": {
+    "node": "12.x.x"
+  },
   "license": "BSD-3-Clause",
   "repository": "Polymer/pwa-starter-kit",
   "scripts": {
-    "start": "gulp serve",
-    "start:webpack": "webpack-dev-server --open --mode development",
+    "start:nonwebpack": "gulp serve",
+    "start": "webpack-dev-server --open --mode development",
     "build": "tsc --skipLibCheck && polymer build --auto-base-path && gulp prpl-server",
     "build:static": "tsc --skipLibCheck && polymer build",
     "build:webpack": "rm -rf dist && webpack --config webpack.config.js",

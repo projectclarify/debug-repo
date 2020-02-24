@@ -9,14 +9,32 @@ env:
   PROJECT_ID: clarify
 
 jobs:
-  setup-build-deploy:
-    name: Setup, Build, and Deploy
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build:webpack
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: studyuidist
+          path: ftw/ftw_ui/dist
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-
-      # Setup gcloud CLI
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: studyuidist
+          path: ftw/ftw_ui/dist
       - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: '275.0.0'
@@ -27,4 +45,4 @@ jobs:
           gcloud config set project $PROJECT_ID
       - name: Deploy
         run: |
-          gcloud app deploy ftw/ftw_ui/server/app.yaml
+          cd ftw/ftw_ui && gcloud app deploy app.yaml
