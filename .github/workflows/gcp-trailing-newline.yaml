@@ -1,4 +1,4 @@
-name: gcp notrailing
+name: gcp trailing
 on:
   push:
     branches:
