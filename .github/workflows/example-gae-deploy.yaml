@@ -16,9 +16,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Install Dependencies
-        run: yarn install
+        run: cd ftw/ftw_ui && yarn install
       - name: Build
-        run: yarn build:webpack
+        run: cd ftw/ftw_ui && yarn build:webpack
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
