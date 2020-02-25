@@ -5,8 +5,7 @@ on:
     - master
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_ZONE: ${{ secrets.GCP_ZONE }}
-
+  GCP_REGION: ${{ secrets.GCP_REGION }}
 jobs:
   deploy-loader-functions:
     name: Deploy ftw loader functions
