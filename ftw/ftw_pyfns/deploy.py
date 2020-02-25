@@ -43,10 +43,11 @@ flags.DEFINE_string('iam_role', None, 'A comma-separated list of IAM roles.')
 flags.DEFINE_string('which', '', 'A comma-sep. list of fn names.')
 
 
-def _deploy_http_trigger_function(fname, region, runtime="python37",
+def _deploy_http_trigger_function(fname, region, project, runtime="python37",
                                   iam_member=None, iam_role=None):
   cmd = [
     "gcloud", "functions", "deploy", "--region", region, "--trigger-http",
+    "--project", project,
     "--update-labels", "function-group=loader",
     "--runtime", runtime, fname
   ]
@@ -67,53 +68,35 @@ def _deploy_http_trigger_function(fname, region, runtime="python37",
   return [deploy_output, iam_output]
 
 
-def _deploy_check_membership(region, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="check_membership",
+def _deploy_check_membership(region, project, iam_member=None, iam_role=None):
+  _deploy_http_trigger_function(fname="check_membership", project=project,
                                 region=region, iam_member=iam_member,
                                 iam_role=iam_role)
 
 
-def _deploy_mint_join_codes(region, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="mint_join_codes",
+def _deploy_mint_join_codes(region, project, iam_member=None, iam_role=None):
+  _deploy_http_trigger_function(fname="mint_join_codes", project=project,
                                 region=region, iam_member=iam_member,
                                 iam_role=iam_role)
 
 
-def _deploy_maybe_render(region, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="maybe_render",
+def _deploy_save_registration(region, project, iam_member=None, iam_role=None):
+  _deploy_http_trigger_function(fname="save_registration", project=project,
                                 region=region, iam_member=iam_member,
                                 iam_role=iam_role)
 
 
-def _deploy_save_registration(region, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="save_registration",
+def _deploy_query_model_template(region, project, iam_member=None, iam_role=None):
+  _deploy_http_trigger_function(fname="query_model_template", project=project,
                                 region=region, iam_member=iam_member,
                                 iam_role=iam_role)
 
-
-def _deploy_query_model_template(region, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="query_model_template",
-                                region=region, iam_member=iam_member,
-                                iam_role=iam_role)
-
-
-def _deploy_rfn_study_1234(region, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="rfn_study_1234",
-                                region=region, iam_member=iam_member,
-                                iam_role=iam_role)
-
-
-# Some functions may need different deploy functions so let's just specify
-# what python deploy function to call for each function name. E.g. the
-# model inference glue function needs a vpc while the others dont.
 
 FUNCTIONS = {
   "check_membership": _deploy_check_membership,
   "mint_join_codes": _deploy_mint_join_codes,
-  "maybe_render": _deploy_maybe_render,
   "save_registration": _deploy_save_registration,
   "query_model_template": _deploy_query_model_template,
-  "rfn_study_1234": _deploy_rfn_study_1234
 }
 
 
@@ -145,7 +128,8 @@ def main(argv):
   exceptions = []
 
   process_args = namedtuple("pargs", ["region", "iam_member", "iam_role"])(
-    region=region, iam_member=FLAGS.iam_member, iam_role=FLAGS.iam_role)
+    region=region, project=project,
+    iam_member=FLAGS.iam_member, iam_role=FLAGS.iam_role)
 
   for function_name in which_functions:
     if function_name not in FUNCTIONS:
