@@ -59,7 +59,7 @@ def _deploy_http_trigger_function(fname, region, project, runtime="python37",
   if iam_member and iam_role:
     iam_cmd = [
       "gcloud", "alpha", "functions", "add-iam-policy-binding",
-      "--region", region, "--member", iam_member, "--role", iam_role
+      "--region", region, "--project", project, "--member", iam_member, "--role", iam_role
     ]
     print("Updating gcf iam with cmd: {}".format(" ".join(iam_cmd)))
     iam_output = subprocess.check_output(iam_cmd)
@@ -69,26 +69,26 @@ def _deploy_http_trigger_function(fname, region, project, runtime="python37",
 
 
 def _deploy_check_membership(region, project, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="check_membership", project=project,
-                                region=region, iam_member=iam_member,
+  _deploy_http_trigger_function(fname="check_membership", region=region,
+                                project=project, iam_member=iam_member,
                                 iam_role=iam_role)
 
 
 def _deploy_mint_join_codes(region, project, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="mint_join_codes", project=project,
-                                region=region, iam_member=iam_member,
+  _deploy_http_trigger_function(fname="mint_join_codes", region=region,
+                                project=project, iam_member=iam_member,
                                 iam_role=iam_role)
 
 
 def _deploy_save_registration(region, project, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="save_registration", project=project,
-                                region=region, iam_member=iam_member,
+  _deploy_http_trigger_function(fname="save_registration", region=region,
+                                project=project, iam_member=iam_member,
                                 iam_role=iam_role)
 
 
 def _deploy_query_model_template(region, project, iam_member=None, iam_role=None):
-  _deploy_http_trigger_function(fname="query_model_template", project=project,
-                                region=region, iam_member=iam_member,
+  _deploy_http_trigger_function(fname="query_model_template", region=region,
+                                project=project, iam_member=iam_member,
                                 iam_role=iam_role)
 
 
