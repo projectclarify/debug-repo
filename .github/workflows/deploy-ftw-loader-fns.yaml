@@ -19,5 +19,9 @@ jobs:
         service_account_email: ${{ secrets.SA_EMAIL }}
         service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
     - name: Deploy core loader functions
-      run: cd ftw/ftw_pyfns && pip install -e . && python deploy.py --all
+      run: |
+        cd ftw/ftw_pyfns && \
+        gcloud functions deploy --region ${GCP_REGION} \
+          --project ${GCP_PROJECT} --trigger-http \
+          --runtime python37 check_membership
 
