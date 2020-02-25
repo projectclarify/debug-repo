@@ -1,13 +1,10 @@
 name: FTW Deploy Study
-
 on:
   push:
     branches:
     - master
-
 env:
   PROJECT_ID: clarify
-
 jobs:
   build:
     name: Build
@@ -18,12 +15,12 @@ jobs:
       - name: Install Dependencies
         run: cd ftw/ftw_ui && yarn install
       - name: Build
-        run: cd ftw/ftw_ui && yarn build:webpack
+        run: cd ftw/ftw_ui && yarn build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
-          name: studyuidist
-          path: ftw/ftw_ui/dist
+          name: build
+          path: ftw/ftw_ui/server
   deploy:
     name: Deploy
     needs: build
@@ -34,8 +31,8 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@master
         with:
-          name: studyuidist
-          path: ftw/ftw_ui/dist
+          name: build
+          path: ftw/ftw_ui/server
       - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: '275.0.0'
@@ -46,4 +43,4 @@ jobs:
           gcloud config set project $PROJECT_ID
       - name: Deploy
         run: |
-          cd ftw/ftw_ui && gcloud app deploy app.yaml
+          cd ftw/ftw_ui && gcloud app deploy server/app.yaml
