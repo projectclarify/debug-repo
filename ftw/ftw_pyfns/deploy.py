@@ -127,7 +127,7 @@ def main(argv):
 
   exceptions = []
 
-  process_args = namedtuple("pargs", ["region", "iam_member", "iam_role"])(
+  process_args = namedtuple("pargs", ["region", "project", "iam_member", "iam_role"])(
     region=region, project=project,
     iam_member=FLAGS.iam_member, iam_role=FLAGS.iam_role)
 
